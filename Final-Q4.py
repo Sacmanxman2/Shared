@@ -6,13 +6,11 @@ dic2 = {3:30, 4:40}
 dic3 = {5:50,6:60}
 #Expected Result : {1: 10, 2: 20, 3: 30, 4: 40, 5: 50, 6: 60}
 
-out = {}
+out = {} # Blank dictionary to start with
 
-def cycle(d,out=out):
-    for i in d:
-        print(i)
-        print(d[i])
-        out.update({i:d[i]})
+def cycle(d,out=out): # I just put all this code in a function that I'll 'cycle' through so I don't have to repeat it
+    for i in d: # For every key in dictionary d
+        out.update({i:d[i]}) # Update (or append if nonexistent) the key:value pairs to the 'out' dictionary
 
 cycle(dic1)
 cycle(dic2)
