@@ -4,8 +4,7 @@
 # Test Data:
 # Power (3,4) -> 81
 
-
-
+# This should be pretty self explanatory
 def Power(a,b):
     return(a**b)
 
