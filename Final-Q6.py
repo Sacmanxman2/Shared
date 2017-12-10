@@ -14,16 +14,11 @@ month1 = dateDiv[0]
 day1 = dateDiv[1]
 year1 = dateDiv[2]
 
+## Logic for date
 # removing special characters from the dates
 month1 = (''.join(c for c in month1 if c not in ',.!:;')).lower()
 day1 = (''.join(c for c in day1 if c not in ',.!:;')).lower()
 year1 = (''.join(c for c in year1 if c not in ',.!:;')).lower()
-
-if len(dateDiv)>4:
-    time1 = dateDiv[3] + dateDiv[4]
-else:
-    time1 = dateDiv[3]
-time1 = (''.join(c for c in time1 if c not in ',.!;')).lower()
 
 mNum = 0
 for x,m in enumerate(months):
@@ -35,10 +30,19 @@ if mNum>9:
 else:
     dateFin = '-'.join([year1,'0'+str(mNum),day1])
 
-time2 = time1.split(':',1)
-hr = time2[0]
-minFin = (re.split("[a-z]+",time2[1],1))[0]
-amPm = (re.split("[0-9]+",time2[1],1))[1]
+## Logic for time
+
+time1 = dateDiv[3].split(':')
+
+# If the am/pm isn't spaced out, separate it
+if len(dateDiv)>4:
+    hr = time1[0]
+    minFin = time1[1]
+    amPm = dateDiv[4]
+else:
+    hr = time1[0]
+    minFin = (re.split("[a-z]+",time1[1]))[0]
+    amPm = (re.split("[0-9]+",time1[1]))[1]
 
 if amPm == 'am':
     hrFin = hr
@@ -46,6 +50,8 @@ else:
     hrFin = int(hr)+12
 
 timeFin = ':'.join([str(hrFin),str(minFin),'00'])
+
+## Put them together
 
 dateTimeFin = dateFin + ' ' + timeFin
 print(dateTimeFin)
